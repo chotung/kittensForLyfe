@@ -42,6 +42,21 @@ app.post("/api/kittens", async (req, res) => {
   res.json(newKitten);
 });
 
+// DELETE A KITTEN
+app.delete("/api/kittens/:name", async (req, res) => {
+  const {name} = req.params
+  const query = {name}
+  const deleteKitten = await Kitten.deleteOne(query)
+  res.json({msg: "Deleted Kitten", kitten: deleteKitten})
+});
+// UPDATES A KITTEN
+app.put("/api/kittens/:name", async (req, res) => {
+  const {name} = req.params
+  const query = {name}
+  const update = {name:req.body.name}
+  const updateKitten = await Kitten.updateOne(query, update)
+  res.json({msg: "Deleted Kitten", kitten: updateKitten})
+});
 
 
 
