@@ -46,20 +46,28 @@ import React, { useState, useEffect} from "react";
 import axios from "axios";
 
 const App = () => {
-
+  // creates a state for kittens
+  // and a method to set state for kittens
   const [kittens, setKittens] = useState()
-
+  // mimics componentDidMount (){}
+  // make api calls
   useEffect(() => {
     getAllKittens()
   }, [])
   
+
+  // function to make an api call to the backend
+  // then sets the kitten state to the data we get in our database
   const getAllKittens = async () => {
     const response = await axios("/api/kittens")
     const { data } = await response
     setKittens(data)
   }
 
-  
+  // function to show all the kittens on the page
+  // loops through the state of kittens
+  // for each kitten creates a li element 
+  //    has a key of the id, id of index and content of name 
   const showMeAllKittens = () => {
     return kittens.map((kitten, index) => {
       return (
@@ -77,5 +85,8 @@ const App = () => {
     </div>
   );
 }
+// ternary statement to handle when state is undefined
+//    -  this means that we're loading the kittens
+// When there are kittens show them
 
 export default App;
