@@ -44,7 +44,8 @@
 // HOOKS VERSION
 import React, { useState, useEffect} from "react";
 import axios from "axios";
-
+import { CircularProgress } from '@material-ui/core';
+import "./App.css"
 const App = () => {
   // creates a state for kittens
   // and a method to set state for kittens
@@ -78,9 +79,9 @@ const App = () => {
   
   
   return (
-    <div>
+    <div className="App">
       <ul className="kittens">
-        {kittens === undefined ? "Loading..." : showMeAllKittens()}
+        {kittens === undefined ? <CircularProgress /> : showMeAllKittens()}
       </ul>
     </div>
   );
