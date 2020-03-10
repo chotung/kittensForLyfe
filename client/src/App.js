@@ -1,7 +1,7 @@
 // import React from "react";
-import axios from "axios"
+// import axios from "axios"
 
-
+// CLASSIC VERSION
 // class App extends React.Component {
 
 //   state = {
@@ -41,8 +41,9 @@ import axios from "axios"
 
 // export default App;
 //=========================================================
-
+// HOOKS VERSION
 import React, { useState, useEffect} from "react";
+import axios from "axios";
 
 const App = () => {
 
@@ -55,15 +56,12 @@ const App = () => {
   const getAllKittens = async () => {
     const response = await axios("/api/kittens")
     const { data } = await response
-    setKittens({
-      kittens: data
-    })
+    setKittens(data)
   }
 
   
   const showMeAllKittens = () => {
-    // WE're not getting kittens
-    return kittens.kittens.map((kitten, index) => {
+    return kittens.map((kitten, index) => {
       return (
         <li key={kitten._id}id={index}>{kitten.name}</li>
       )
@@ -81,6 +79,3 @@ const App = () => {
 }
 
 export default App;
-
-// context + useReducer 
-// WRAP WHOLE APP
