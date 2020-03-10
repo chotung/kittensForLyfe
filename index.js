@@ -2,6 +2,10 @@ require("dotenv").config()
 const express = require("express")
 const app = express()
 
+//MIDDLEWARE
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+
 const port = process.env.PORT || 5000
 // DATABASE
 const mongoose = require('mongoose');
@@ -21,12 +25,24 @@ const kittySchema = new mongoose.Schema({
 });
 const Kitten = mongoose.model("Kitten", kittySchema);
 
-const lola = new Kitten({name: "Lola"})
-console.log(lola.name)
-
 // ROUTES
-app.get("/", (req, res) => {
-  res.send(lola.name) 
+
+// GET ALL KITTENS
+app.get("/api/kittens", async (req, res) => {
+  const allKittens = await Kitten.find({})
+  res.json(allKittens)
 })
+
+// POST A KITTEN
+app.post("/api/kittens", async (req, res) => {
+  const { name } = req.body
+  const newKitten = await Kitten.create({
+    name
+  })
+  res.json(newKitten);
+});
+
+
+
 
 app.listen(port, console.log(`Listening on port ${port}`))
