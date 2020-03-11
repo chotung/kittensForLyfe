@@ -5,7 +5,6 @@ import { useKittenContext } from "../utils/globalState"
 import { CircularProgress } from '@material-ui/core';
 
 
-
 export default function KittenContainer() {
   
   const [state, dispatch] = useKittenContext()
@@ -20,7 +19,7 @@ export default function KittenContainer() {
   const getAllKittens = async () => {
     const response = await axios("/api/kittens")
     const { data } = await response
-    
+
     const kittyAction = {
       type: "GET_KITTENS",
       payload: data
